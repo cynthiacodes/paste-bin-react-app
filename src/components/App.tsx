@@ -1,10 +1,10 @@
-import { MyComponent } from "./MyComponent";
+import { ListOfPastes } from "./ListOfPastes";
 import "./App.css";
 
 function App() {
     return (
         <div className="App">
-            <MyComponent />
+            <ListOfPastes />
         </div>
     );
 }
