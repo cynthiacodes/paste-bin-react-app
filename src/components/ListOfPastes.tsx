@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { PasteItem } from "./PasteItemInterface";
 
 interface ListOfPastesProps {
@@ -25,8 +25,8 @@ export function ListOfPastes({ allPastes }: ListOfPastesProps): JSX.Element {
     const renderEachPaste =
         allPastes &&
         allPastes.map((paste) => (
-            <>
-                <li key={paste.id}>
+            <Fragment key={paste.id}>
+                <li>
                     <h3>{paste.title} Date created: </h3>
                     {formatDate(paste.creationDate)} Description:{" "}
                     {limitText(paste.description, 5)}
@@ -34,7 +34,7 @@ export function ListOfPastes({ allPastes }: ListOfPastesProps): JSX.Element {
                         Read More
                     </button>
                 </li>
-            </>
+            </Fragment>
         ));
     return (
         <>
