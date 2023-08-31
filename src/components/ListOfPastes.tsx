@@ -1,15 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
-interface pasteItem {
-    id: number;
-    title: string;
-    description: string;
-    creationDate: string;
-}
+import { PasteItem } from "./PasteItemInterface";
 
 export function ListOfPastes(): JSX.Element {
-    const [pastes, setPastes] = useState<pasteItem[]>([]);
+    const [pastes, setPastes] = useState<PasteItem[]>([]);
 
     const getPastes = async () => {
         try {
@@ -18,7 +12,6 @@ export function ListOfPastes(): JSX.Element {
             );
             const allPastes = response.data;
             setPastes(allPastes);
-            console.log({ allPastes });
         } catch (error) {
             console.error("Error:", error);
         }
