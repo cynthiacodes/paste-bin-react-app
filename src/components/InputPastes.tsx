@@ -2,7 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { PostType } from "./PasteItemInterface";
 
-export function InputPastes(): JSX.Element {
+interface InputPastesProps {
+    getPastes: () => Promise<void>;
+}
+
+export function InputPastes({ getPastes }: InputPastesProps): JSX.Element {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
@@ -26,6 +30,10 @@ export function InputPastes(): JSX.Element {
                 "https://paste-bin-backend.onrender.com/pastes",
                 pasteInput
             );
+
+            getPastes();
+            setTitle("");
+            setDescription("");
             console.log("the following has been added", response.data);
         } catch (error) {
             console.error("Error:", error);
@@ -36,12 +44,14 @@ export function InputPastes(): JSX.Element {
         <>
             <form onSubmit={handleSubmitInput}>
                 <input
+                    className="title"
                     type="text"
                     value={title}
                     placeholder="Add your title here"
                     onChange={handleTitleInput}
                 />
                 <input
+                    className="submission"
                     type="text"
                     value={description}
                     placeholder="Add code snippet here"
