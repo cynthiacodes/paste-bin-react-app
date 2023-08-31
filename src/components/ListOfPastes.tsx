@@ -1,34 +1,53 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PasteItem } from "./PasteItemInterface";
 
 interface ListOfPastesProps {
-    getPastes: () => Promise<PasteItem[] | undefined>;
+    allPastes: PasteItem[] | undefined;
 }
 
-export function ListOfPastes({ getPastes }: ListOfPastesProps): JSX.Element {
-    const [pastes, setPastes] = useState<PasteItem[] | undefined>(undefined);
+function limitText(text: string, amount: number) {
+    const splitText = text.split(" ", amount);
+    const ellipses = "...";
+    return splitText.join(" ") + ellipses;
+}
 
-    useEffect(() => {
-        const fetchPastes = async () => {
-            const allPastes = await getPastes();
-            setPastes(allPastes);
-        };
+function formatDate(date: string) {
+    return date.substring(0, 10);
+}
 
-        fetchPastes();
-    }, [getPastes]);
+export function ListOfPastes({ allPastes }: ListOfPastesProps): JSX.Element {
+    const [selectedPaste, setSelectedPaste] = useState<PasteItem | null>();
+
+    const handleSummaryClick = (paste: PasteItem) => setSelectedPaste(paste);
+
+    const handleCloseSummary = () => setSelectedPaste(null);
 
     const renderEachPaste =
-        pastes &&
-        pastes.map((paste) => (
-            <li key={paste.id}>
-                title: {paste.title}
-                date created: {paste.creationDate}
-                description: {paste.description}
-            </li>
+        allPastes &&
+        allPastes.map((paste) => (
+            <>
+                <li key={paste.id}>
+                    <h3>{paste.title} Date created: </h3>
+                    {formatDate(paste.creationDate)} Description:{" "}
+                    {limitText(paste.description, 5)}
+                    <button onClick={() => handleSummaryClick(paste)}>
+                        Read More
+                    </button>
+                </li>
+            </>
         ));
     return (
         <>
             <ol> {renderEachPaste}</ol>
+
+            {selectedPaste && (
+                <>
+                    {" "}
+                    <h2>{selectedPaste.title}</h2>
+                    <p>{selectedPaste.description}</p>{" "}
+                    <button onClick={() => handleCloseSummary()}> close</button>
+                </>
+            )}
         </>
     );
 }
