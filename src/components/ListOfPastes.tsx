@@ -1,9 +1,5 @@
 import { Fragment, useState } from "react";
-import { PasteItem } from "./PasteItemInterface";
-
-interface ListOfPastesProps {
-    allPastes: PasteItem[] | undefined;
-}
+import { PasteItem, ListOfPastesProps } from "./Interfaces";
 
 function limitText(text: string, amount: number) {
     const splitText = text.split(" ", amount);
@@ -22,7 +18,7 @@ export function ListOfPastes({ allPastes }: ListOfPastesProps): JSX.Element {
 
     const handleCloseSummary = () => setSelectedPaste(null);
 
-    const renderEachPaste =
+    const renderEachSummary =
         allPastes &&
         allPastes.map((paste) => (
             <Fragment key={paste.id}>
@@ -36,18 +32,20 @@ export function ListOfPastes({ allPastes }: ListOfPastesProps): JSX.Element {
                 </li>
             </Fragment>
         ));
+
+    const renderFullSinglePaste = selectedPaste && (
+        <>
+            {" "}
+            <h2>{selectedPaste.title}</h2>
+            <p>{selectedPaste.description}</p>{" "}
+            <button onClick={() => handleCloseSummary()}> close</button>
+        </>
+    );
     return (
         <>
-            <ol> {renderEachPaste}</ol>
+            <ol> {renderEachSummary}</ol>
 
-            {selectedPaste && (
-                <>
-                    {" "}
-                    <h2>{selectedPaste.title}</h2>
-                    <p>{selectedPaste.description}</p>{" "}
-                    <button onClick={() => handleCloseSummary()}> close</button>
-                </>
-            )}
+            {renderFullSinglePaste}
         </>
     );
 }

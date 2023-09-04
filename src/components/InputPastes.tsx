@@ -1,10 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { PostType } from "./PasteItemInterface";
-
-interface InputPastesProps {
-    getPastes: () => Promise<void>;
-}
+import { UserPostType, InputPastesProps } from "./Interfaces";
 
 export function InputPastes({ getPastes }: InputPastesProps): JSX.Element {
     const [title, setTitle] = useState("");
@@ -21,7 +17,7 @@ export function InputPastes({ getPastes }: InputPastesProps): JSX.Element {
     const handleSubmitInput = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const pasteInput: PostType = {
+            const pasteInput: UserPostType = {
                 title: title,
                 description: description,
             };
