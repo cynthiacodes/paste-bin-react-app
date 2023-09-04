@@ -16,6 +16,12 @@ Install project dependencies
 yarn
 ```
 
+## Running Tests
+
+```
+yarn test
+```
+
 ## Running dev server
 
 ```
