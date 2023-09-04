@@ -3,7 +3,7 @@ import { ListOfPastes } from "./ListOfPastes";
 import { InputPastes } from "./InputPastes";
 
 import { useEffect, useState } from "react";
-import { PasteItem, PasteItemDB } from "./PasteItemInterface";
+import { PasteItem, PasteItemDB } from "./Interfaces";
 
 import axios from "axios";
 

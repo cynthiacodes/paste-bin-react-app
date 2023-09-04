@@ -5,7 +5,7 @@ export interface PasteItem {
     creationDate: string;
 }
 
-export interface PostType {
+export interface UserPostType {
     title: string;
     description: string;
 }
@@ -15,4 +15,12 @@ export interface PasteItemDB {
     title: string;
     description: string;
     creation_date: string;
+}
+
+export interface ListOfPastesProps {
+    allPastes: PasteItem[] | undefined;
+}
+
+export interface InputPastesProps {
+    getPastes: () => Promise<void>;
 }
