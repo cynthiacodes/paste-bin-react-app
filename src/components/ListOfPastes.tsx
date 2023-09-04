@@ -1,13 +1,13 @@
 import { Fragment, useState } from "react";
 import { PasteItem, ListOfPastesProps } from "./Interfaces";
 
-function limitText(text: string, amount: number) {
+export function limitText(text: string, amount: number) {
     const splitText = text.split(" ", amount);
     const ellipses = "...";
     return splitText.join(" ") + ellipses;
 }
 
-function formatDate(date: string) {
+export function formatDate(date: string) {
     return date.substring(0, 10);
 }
 
