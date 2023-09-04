@@ -6,6 +6,8 @@ The site allows anyone, without logging in, to paste text into a text area and s
 
 Users are able to see a list of the 10 most recent pastes in summary form.
 
+Backend [Git Repo](https://github.com/cynthiacodes/paste-bin-backend)
+
 ## Installation
 
 Install project dependencies
